@@ -52,7 +52,7 @@ status=$?
 
 if [ $status -eq 0 ]; then
 	cd /var/www
-	cp sshfp /container/service/gunicorn/assets
+	mv sshfp /container/service/gunicorn/assets
 else
 	echo "##########################################################"
 	echo "Error building sshfp"
