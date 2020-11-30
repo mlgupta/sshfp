@@ -28,6 +28,7 @@ mv sshfp-fe /container/service/nginx/assets
 
 # Remove useless files
 rm -rf /tmp/* /var/tmp/* /container/build.sh /container/Dockerfile
+rm -f /container/out.tar.gz
 
 echo "Installing Services"
 /container/tools/install-service
