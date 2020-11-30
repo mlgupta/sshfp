@@ -1,0 +1,45 @@
+#############################################################################
+#                       Confidentiality Information                         #
+#                                                                           #
+# This module is the confidential and proprietary information of            #
+# DBSentry Corp.; it is not to be copied, reproduced, or transmitted in any #
+# form, by any means, in whole or in part, nor is it to be used for any     #
+# purpose other than that for which it is expressly provided without the    #
+# written permission of DBSentry Corp.                                      #
+#                                                                           #
+# Copyright (c) 2020-2021 DBSentry Corp.  All Rights Reserved.              #
+#                                                                           #
+#############################################################################
+# All environment variables used after the container first start must be 
+# defined here.
+#############################################################################
+#
+SSHFP_LOG_LEVEL: 256
+
+# Ulimit
+SSHFP_NOFILE: 1024
+
+# Do not perform any chown to fix file ownership
+DISABLE_CHOWN: false
+
+# UID/GID for SSHFP User
+NGINX_UID: 10080
+NGINX_GID: 10080
+
+
+# Required and used for new SSHFP server only
+SSHFP_ORGANIZATION_NAME: Example Inc.
+SSHFP_DOMAIN: keyper.example.org
+
+SSHFP_TLS_CA_CRT_FILENAME: ca.crt
+SSHFP_TLS_CRT_FILENAME: server.crt
+SSHFP_TLS_KEY_FILENAME: server.key
+SSHFP_TLS_DH_PARAM_FILENAME: dhparam.pem
+
+SSHFP_TLS_ENFORCE: false
+SSHFP_TLS_CIPHER_SUITE: TLSv1.2:HIGH:!aNULL:!eNULL
+SSHFP_TLS_PROTOCOL_MIN: 3.3
+SSHFP_TLS_VERIFY_CLIENT: demand
+
+FLASK_CONFIG: prod
+
