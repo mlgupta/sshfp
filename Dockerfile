@@ -15,7 +15,6 @@ RUN 	apk add --no-cache 		python3 				\
 								py3-yaml				\
 								runit					\
 								bash					\
-								npm						\
 								shadow					\
 								openssl					\
 								nginx	 				\
