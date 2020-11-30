@@ -12,29 +12,28 @@
 #                                                                           #
 #############################################################################
 # Build Vue frontend app
-if [ -f /container/keyper-fe/package.json ]; then
-	cd /container/keyper-fe
-	rm -rf .git .gitignore
+if [ -f /container/sshfp-fe/package.json ]; then
+	cd /container/sshfp-fe
 	npm install
 	npm run build
 
 	status=$?
 
 	if [ $status -eq 0 ]; then
-		mv dist /var/www/keyper-fe
+		mv dist /var/www/sshfp-fe
 	else
 		echo "##########################################################"
-		echo "Error building keyper-fe"
+		echo "Error building sshfp-fe"
 		echo "##########################################################"
 	fi
 else
-	mkdir /var/www/keyper-fe
+	mkdir /var/www/sshfp-fe
 fi
 
 # Build and install flask modules/libraries
-mv /container/keyper /var/www
-cd /var/www/keyper
-rm -rf env/* .git .gitignore
+mv /container/sshfp /var/www
+cd /var/www/sshfp
+rm -rf env/*
 python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt
@@ -46,6 +45,6 @@ if [ $status -eq 0 ]; then
 	tar -czf /container/out.tar.gz .
 else
 	echo "##########################################################"
-	echo "Error building keyper"
+	echo "Error building sshfp"
 	echo "##########################################################"
 fi

@@ -21,47 +21,13 @@ mkdir /container/run
 chown -R root:root /container/environment
 chmod 700 /container/environment /container/environment/startup
 
-# Build Vue frontend app
-if [ -f /container/modules/sshfp-fe/package.json ]; then
-	cd /container/modules/sshfp-fe
-	npm install
-	npm run build
-
-	status=$?
-
-	if [ $status -eq 0 ]; then
-		mv dist /container/service/nginx/assets/sshfp-fe
-	else
-		echo "##########################################################"
-		echo "Error building sshfp-fe"
-		echo "##########################################################"
-	fi
-else
-	mkdir /container/service/nginx/assets/sshfp-fe
-fi
-
-# Build and install flask modules/libraries
-mv /container/modules/sshfp /var/www
-cd /var/www/sshfp
-rm -rf env/*
-python3 -m venv env
-. env/bin/activate
-pip install -r requirements.txt
-
-status=$?
-
-if [ $status -eq 0 ]; then
-	cd /var/www
-	mv sshfp /container/service/gunicorn/assets
-else
-	echo "##########################################################"
-	echo "Error building sshfp"
-	echo "##########################################################"
-fi
-
+cd /container
+tar -xzf out.tar.gz
+mv sshfp /container/service/gunicorn/assets
+mv sshfp-fe /container/service/nginx/assets
 
 # Remove useless files
-rm -rf /tmp/* /var/tmp/* /container/build.sh /container/Dockerfile /container/modules
+rm -rf /tmp/* /var/tmp/* /container/build.sh /container/Dockerfile
 
 echo "Installing Services"
 /container/tools/install-service
