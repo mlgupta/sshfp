@@ -54,7 +54,7 @@
             </tr>
           </tbody>
         </v-simple-table>
-        <v-alert type="error" v-else>
+        <v-alert type="error" v-else-if="dnsData.length > 0 && hostData.length > 0">
           No Match.
         </v-alert>
       </div>

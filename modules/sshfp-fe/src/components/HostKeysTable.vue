@@ -29,7 +29,7 @@
         </div>
       </div>
       <div v-else-if="loading === false">
-        <v-simple-table dense>
+        <v-simple-table dense v-if="hostData.length > 0">
           <thead>
             <tr>
               <th class="text-left">
