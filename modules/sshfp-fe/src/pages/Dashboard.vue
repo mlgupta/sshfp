@@ -21,7 +21,7 @@
       <v-divider></v-divider>
       <v-card-text>
 <p>This tester will list SSHFP records, SSH Key Fingerprints for a server, and matching Key fingerprints between the published DNS SSHFP records and Fingerprints returned by the SSH server. SSHFP records are obtained by performing DNS lookup against the domain's authoritative name servers, so changes to SSHFP records should show up instantly. This tool extracts SSH Key Fingerprints using ssh-keyscan against the server and port. Result also includes a set of matching keys between published DNS SSHFP records and Key fingerprints returned by the SSH server. You should use DNSSEC when publishing SSHFP records. And, you should only perform this test against the server you own.</p>
-<p>This is an OpenSource tool released under GPLV3 license and can be downloaded from its <a href=https://github.com/dbsentry/keyper-docker>GitHub repository</a>.</p>
+<p>This is an OpenSource tool released under the GPLv3 license. You can download source code from its <a href=https://github.com/dbsentry/sshfp>GitHub repository</a>. You can also download the Docker Image from the <a href=https://hub.docker.com/r/dbsentry/sshfp>Docker Hub</a></p>
       </v-card-text>
       <v-divider></v-divider>
       <v-form >
