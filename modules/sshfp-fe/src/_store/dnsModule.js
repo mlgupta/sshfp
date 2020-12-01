@@ -51,7 +51,7 @@ export const dnsStore = {
             Vue.set(state, "status", { loading: false });
         },
         dnsScanSuccess(state, result) {
-            var sortedResult = result.sort((a, b) => {
+            var sortedResult = [].slice.call(result).sort((a, b) => {
                 let compare = 0;
                 let acol = a.algorithm + '' + a.fp_type;
                 let bcol = b.algorithm + '' + b.fp_type;
