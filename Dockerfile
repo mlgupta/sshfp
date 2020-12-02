@@ -23,4 +23,4 @@ COPY 	container /container
 COPY	--from=builder /container/out.tar.gz /container/out.tar.gz
 RUN 	/container/build.sh
 ENTRYPOINT ["/container/tools/run"]
-EXPOSE 80 443
+# EXPOSE 80 443
