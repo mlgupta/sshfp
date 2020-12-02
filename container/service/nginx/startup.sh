@@ -18,6 +18,8 @@ if [ ! -e "$FIRST_START_DONE" ]; then
 	touch $FIRST_START_DONE
 fi
 
+[ -z ${PORT} ] && PORT=${NGINX_PORT} 
+
 log-helper info "Setting UID/GID for nginx to ${NGINX_UID}/${NGINX_GID}"
 [ "$(id -g nginx)" -eq ${NGINX_GID} ] || groupmod -g ${NGINX_GID} nginx
 [ "$(id -u nginx)" -eq ${NGINX_UID} ] || usermod -u ${NGINX_UID} -g ${NGINX_GID} nginx
@@ -28,7 +30,10 @@ cd /var/www
 chown -R nginx:nginx sshfp-fe
 
 cd /container/service/nginx/assets/etc/conf.d
-[ -f default.conf ] && mv default.conf /etc/nginx/conf.d
+if [ -f default.conf ]; then
+        sed -i "s/{{PORT}}/${PORT}/g" default.conf
+        mv default.conf /etc/nginx/conf.d
+fi
 
 [ -d /etc/nginx/certs ] || mkdir /etc/nginx/certs
 cp /container/service/nginx/assets/certs/* /etc/nginx/certs

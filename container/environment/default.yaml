@@ -22,10 +22,12 @@ SSHFP_NOFILE: 1024
 # Do not perform any chown to fix file ownership
 DISABLE_CHOWN: false
 
+# NGINX Port
+NGINX_PORT: 80
+
 # UID/GID for SSHFP User
 NGINX_UID: 10080
 NGINX_GID: 10080
-
 
 # Required and used for new SSHFP server only
 SSHFP_ORGANIZATION_NAME: Example Inc.

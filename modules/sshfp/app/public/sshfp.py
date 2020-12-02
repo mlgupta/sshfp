@@ -44,6 +44,7 @@ def get_dns_sshfp():
     result = []
 
     try:
+        app.logger.info("SSHFP DNS Lookup for %s" % (host))
         dns.resolver.reset_default_resolver()
         nameservers = query_authoritative_ns(host)
         authns = []
@@ -88,6 +89,7 @@ def get_host_sshfp():
     result = []
 
     try:
+        app.logger.info("ssh-keyscan for %s:%s" % (host, port))
         answers = subprocess.run([
             'ssh-keyscan',
             '-D',
