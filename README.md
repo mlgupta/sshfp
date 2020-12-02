@@ -15,7 +15,23 @@ $ make build
 ```
 The generated image when run would start a docker container with all the services.
 
-## Related Projects
+## Run
+You can use either docker or podman to run this container.
+```console
+$ docker run -p 8080:80 -it dbsentry/sshfp
+```
+
+```console
+$ podman run -p 8080:80 -it dbsentry/sshfp
+```
+
+By default the webserver uses port 80 on the container, if you want to use other port:
+```console
+$ docker run -p 8080:8080 --env PORT=8080 -it dbsentry/sshfp
+```
+```console
+$ podman run -p 8080:8080 --env PORT=8080 -it dbsentry/sshfp
+```
 
 ## License
 All assets and code are under the GNU GPL LICENSE and in the public domain unless specified otherwise.
