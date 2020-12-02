@@ -1,3 +1,10 @@
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/dbsentry/sshfp)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dbsentry/sshfp/CI)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/dbsentry/sshfp)
+![GitHub issues](https://img.shields.io/github/issues/dbsentry/sshfp)
+![GitHub last commit](https://img.shields.io/github/last-commit/dbsentry/sshfp)
+![GitHub](https://img.shields.io/github/license/dbsentry/sshfp)
+![Docker Pulls](https://img.shields.io/docker/pulls/dbsentry/sshfp)  
 
 SSHFP is SSHFP tester. It will list SSHFP records, SSH Key Fingerprints for a server, and matching Key fingerprints between the published DNS SSHFP records and Fingerprints returned by the SSH server. SSHFP records are obtained by performing DNS lookup against the domain's authoritative name servers, so changes to SSHFP records should show up instantly. This tool extracts SSH Key Fingerprints using ssh-keyscan against the server and port. Result also includes a set of matching keys between published DNS SSHFP records and Key fingerprints returned by the SSH server. You should use DNSSEC when publishing SSHFP records. And, you should only perform this test against the server you own.
 
