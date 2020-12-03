@@ -75,30 +75,14 @@ export default {
   },
   computed: {
     loading() {
+      Vue.$log.debug(this.$store.state.dnsStore.status.loading);
       return this.$store.state.hostStore.status.loading;
     },
     hostData() {
       return this.$store.state.hostStore.data;
     },
-    alert() {
-      return this.$store.state.alert;
-    },
-    alertMsg() {
-      return this.$store.state.alert.message;
-    },
   },
   methods: {    
-    notifyVue(type, msg) {
-      Vue.$log.debug("Enter");
-
-      this.$notify({
-        message:
-          msg,
-        horizontalAlign: 'center',
-        verticalAlign: 'top',
-        type: type
-      });
-    } 
   }
 };
 </script>

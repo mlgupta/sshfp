@@ -81,25 +81,8 @@ export default {
     dnsData() {
       return this.$store.state.dnsStore.data;
     },
-    alert() {
-      return this.$store.state.alert;
-    },
-    alertMsg() {
-      return this.$store.state.alert.message;
-    },
   },
   methods: {    
-    notifyVue(type, msg) {
-      Vue.$log.debug("Enter");
-
-      this.$notify({
-        message:
-          msg,
-        horizontalAlign: 'center',
-        verticalAlign: 'top',
-        type: type
-      });
-    } 
   }
 };
 </script>
