@@ -24,21 +24,22 @@ $ make build
 The generated image when run would start a docker container with all the services.
 
 ## Run
-You can use either docker or podman to run this container.
+You can use either docker or podman to run this container. Webserver's default port is 8080. And, as the process runs as a non-root user port specified using ```env``` should be greater than 1024. If a port less then 1024 is specified, the port defaults to 8080.
+
 ```console
-$ docker run -p 8080:80 -it dbsentry/sshfp
+$ docker run -p 8080:8800 -it dbsentry/sshfp
 ```
 
 ```console
-$ podman run -p 8080:80 -it dbsentry/sshfp
+$ podman run -p 8080:8080 -it dbsentry/sshfp
 ```
 
-By default the webserver uses port 80 on the container, if you want to use other port:
+By default the webserver uses port 8080 on the container, if you want to use other port:
 ```console
-$ docker run -p 8080:8080 --env PORT=8080 -it dbsentry/sshfp
+$ docker run -p 8080:9080 --env PORT=9080 -it dbsentry/sshfp
 ```
 ```console
-$ podman run -p 8080:8080 --env PORT=8080 -it dbsentry/sshfp
+$ podman run -p 8080:9080 --env PORT=9080 -it dbsentry/sshfp
 ```
 
 ## License
