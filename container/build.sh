@@ -34,4 +34,4 @@ rm -f /container/out.tar.gz
 echo "Installing Services"
 /container/tools/install-service
 
-chown -R sshfp /etc /var /container /run
+chown -R sshfp /etc/nginx /var /container /run
