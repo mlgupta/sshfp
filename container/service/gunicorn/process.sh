@@ -13,5 +13,5 @@
 #############################################################################
 
 log-helper info "gunicorn: Starting"
-exec su -s /bin/sh -c "cd /var/www/sshfp; . env/bin/activate; gunicorn -w 4 'app:create_app()' --bind 127.0.0.1:8000 --user=nginx --group=nginx" nginx
+exec /bin/sh -c "cd /var/www/sshfp; . env/bin/activate; gunicorn -w 4 'app:create_app()' --bind 127.0.0.1:8000"
 log-helper info "gunicorn: Started"

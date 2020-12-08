@@ -18,15 +18,16 @@ if [ ! -e "$FIRST_START_DONE" ]; then
 	touch $FIRST_START_DONE
 fi
 
-log-helper info "Setting UID/GID for nginx to ${NGINX_UID}/${NGINX_GID}"
-[ "$(id -g nginx)" -eq ${NGINX_GID} ] || groupmod -g ${NGINX_GID} nginx
-[ "$(id -u nginx)" -eq ${NGINX_UID} ] || usermod -u ${NGINX_UID} -g ${NGINX_GID} nginx
+#log-helper info "Setting UID/GID for nginx to ${NGINX_UID}/${NGINX_GID}"
+#[ "$(id -g nginx)" -eq ${NGINX_GID} ] || groupmod -g ${NGINX_GID} nginx
+#[ "$(id -u nginx)" -eq ${NGINX_UID} ] || usermod -u ${NGINX_UID} -g ${NGINX_GID} nginx
 
 cd /container/service/gunicorn/assets
-[ -d sshfp ] && mv sshfp /var/www
-cd /var/www
+[ -d sshfp ] && cp -r sshfp /var/www
+#[ -d sshfp ] && mv sshfp /var/www
+#cd /var/www
 
-[ -d /var/log/sshfp ] || mkdir /var/log/sshfp
-chown -R nginx:nginx /var/log/sshfp /var/www/sshfp
+#[ -d /var/log/sshfp ] || mkdir /var/log/sshfp
+#chown -R nginx:nginx /var/log/sshfp /var/www/sshfp
 
 exit 0

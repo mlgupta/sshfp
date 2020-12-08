@@ -14,11 +14,12 @@
 ln -s /container/tools/* /sbin/
 
 apk upgrade --no-cache
+useradd -m sshfp
 
 mkdir /container/run
 [ -d /container/environment/startup ] || mkdir /container/environment/startup
 [ -d /container/service/gunicorn/assets ] || mkdir /container/service/gunicorn/assets
-chown -R root:root /container/environment
+#chown -R root:root /container/environment
 chmod 700 /container/environment /container/environment/startup
 
 cd /container
@@ -33,3 +34,4 @@ rm -f /container/out.tar.gz
 echo "Installing Services"
 /container/tools/install-service
 
+chown -R sshfp /etc /var /container /run
