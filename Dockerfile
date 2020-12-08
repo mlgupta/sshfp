@@ -16,11 +16,12 @@ RUN 	apk add --no-cache 		python3 				\
 								runit					\
 								bash					\
 								shadow					\
-								openssl					\
 								nginx	 				\
 								openssh-client					
 COPY 	container /container
 COPY	--from=builder /container/out.tar.gz /container/out.tar.gz
 RUN 	/container/build.sh
-ENTRYPOINT ["/container/tools/run"]
+USER sshfp
+CMD ["/container/tools/run"]
+#ENTRYPOINT ["/container/tools/run"]
 # EXPOSE 80 443

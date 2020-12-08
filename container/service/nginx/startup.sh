@@ -19,34 +19,28 @@ if [ ! -e "$FIRST_START_DONE" ]; then
 fi
 
 [ -z ${PORT} ] && PORT=${NGINX_PORT} 
+[[ ${PORT} < 1024 ]] && PORT=${NGINX_PORT}
 
-log-helper info "Setting UID/GID for nginx to ${NGINX_UID}/${NGINX_GID}"
-[ "$(id -g nginx)" -eq ${NGINX_GID} ] || groupmod -g ${NGINX_GID} nginx
-[ "$(id -u nginx)" -eq ${NGINX_UID} ] || usermod -u ${NGINX_UID} -g ${NGINX_GID} nginx
+#log-helper info "Setting UID/GID for nginx to ${NGINX_UID}/${NGINX_GID}"
+#[ "$(id -g nginx)" -eq ${NGINX_GID} ] || groupmod -g ${NGINX_GID} nginx
+#[ "$(id -u nginx)" -eq ${NGINX_UID} ] || usermod -u ${NGINX_UID} -g ${NGINX_GID} nginx
 
 cd /container/service/nginx/assets
-[ -d sshfp-fe ] && mv sshfp-fe /var/www
-cd /var/www
-chown -R nginx:nginx sshfp-fe
+[ -d sshfp-fe ] && cp -r sshfp-fe /var/www
+#[ -d sshfp-fe ] && mv sshfp-fe /var/www
+#cd /var/www
+#chown -R nginx:nginx sshfp-fe
+
+cd /etc/nginx
+if [ -f nginx.conf ]; then
+        sed -i "s/^user/#user/g" nginx.conf
+fi
 
 cd /container/service/nginx/assets/etc/conf.d
 if [ -f default.conf ]; then
         sed -i "s/{{PORT}}/${PORT}/g" default.conf
-        mv default.conf /etc/nginx/conf.d
+        cp -f default.conf /etc/nginx/conf.d
 fi
-
-[ -d /etc/nginx/certs ] || mkdir /etc/nginx/certs
-cp /container/service/nginx/assets/certs/* /etc/nginx/certs
-
-SSHFP_TLS_CRT_PATH=/etc/nginx/certs/$SSHFP_TLS_CRT_FILENAME
-SSHFP_TLS_KEY_PATH=/etc/nginx/certs/$SSHFP_TLS_KEY_FILENAME
-
-if [ ! -e "$SSHFP_TLS_CRT_PATH" ]; then
-        log-helper info "Certificate/key do not exist. Generating a self signed certificate ..."
-        openssl req -newkey rsa:2048 -nodes -keyout $SSHFP_TLS_KEY_PATH -x509 -days 3650 -out $SSHFP_TLS_CRT_PATH -subj "/CN=${HOSTNAME}"
-fi
-
-chown -R nginx:nginx /etc/nginx/conf.d/default.conf /etc/nginx/certs /var/lib/nginx
 
 [ -d /run/nginx ] || mkdir /run/nginx
 
